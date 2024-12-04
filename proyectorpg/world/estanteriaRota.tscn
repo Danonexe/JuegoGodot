@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://pbfk12osfqgg"]
+
+[ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_c3now"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7wb8"]
+size = Vector2(37, 14)
+
+[node name="EstanteriaRota" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c3now")
+region_enabled = true
+region_rect = Rect2(2.26678, 132.2, 42.5334, 31.5333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_o7wb8")

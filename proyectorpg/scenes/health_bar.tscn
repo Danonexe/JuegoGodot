@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfenjos7jttif"]
+
+[ext_resource type="Texture2D" uid="uid://0p5k6t7ocsns" path="res://assets/sprites/Health&Stamina/BorderBGNew.png" id="1_3bd5h"]
+[ext_resource type="Texture2D" uid="uid://dk0g3gvnrk4e" path="res://assets/sprites/Pixelarium - Playable Character - Free Version/Pack Content/Front animations/spr_player_front_idle.png" id="1_i5etm"]
+[ext_resource type="Texture2D" uid="uid://ki2jac0j71n7" path="res://assets/sprites/Health&Stamina/BorderNew.png" id="2_sjfth"]
+[ext_resource type="Texture2D" uid="uid://ctaobgrxcvedn" path="res://assets/sprites/Health&Stamina/HealthNew.png" id="4_o47ev"]
+[ext_resource type="Texture2D" uid="uid://cdi2twt8qk324" path="res://assets/sprites/Health&Stamina/StaminaNew.png" id="5_041rv"]
+
+[node name="HealthBar" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(13, 6)
+texture = ExtResource("1_i5etm")
+region_enabled = true
+region_rect = Rect2(721.036, 20.333, 29.333, 15.5)
+
+[node name="Health" type="TextureProgressBar" parent="."]
+z_index = 4
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = ExtResource("1_3bd5h")
+texture_over = ExtResource("2_sjfth")
+texture_progress = ExtResource("4_o47ev")
+
+[node name="Stamina" type="TextureProgressBar" parent="."]
+z_index = 4
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_progress = ExtResource("5_041rv")

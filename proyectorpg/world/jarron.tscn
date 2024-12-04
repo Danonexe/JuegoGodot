@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://gxrbp6igqax0"]
+
+[ext_resource type="Script" path="res://scrips/Jarron.cs" id="1_ia1o1"]
+[ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_wrkt8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sts8o"]
+radius = 7.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hc41d"]
+
+[node name="jarron" type="StaticBody2D"]
+script = ExtResource("1_ia1o1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wrkt8")
+region_enabled = true
+region_rect = Rect2(141.902, 123.46, 19.901, 22.0181)
+
+[node name="Sprite2DRoto" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+texture = ExtResource("1_wrkt8")
+region_enabled = true
+region_rect = Rect2(141.902, 145.087, 19.901, 15.9312)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_sts8o")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hc41d")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

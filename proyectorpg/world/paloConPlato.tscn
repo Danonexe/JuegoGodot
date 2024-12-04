@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmr5jdl15ahqp"]
+
+[ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_3tl4k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6kyq"]
+radius = 3.0
+height = 10.0
+
+[node name="paloConPlato" type="StaticBody2D"]
+position = Vector2(0, -22)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3tl4k")
+offset = Vector2(0, -17)
+region_enabled = true
+region_rect = Rect2(15.5882, 12.7982, 16.1601, 53.1906)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_l6kyq")

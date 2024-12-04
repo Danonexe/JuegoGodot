@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvj4n08ncbxtl"]
+
+[ext_resource type="Texture2D" uid="uid://bdcfoomp2tdue" path="res://assets/sprites/Health&Stamina/EnemyBG.png" id="1_x7ygg"]
+[ext_resource type="Texture2D" uid="uid://bie525jahlgnr" path="res://assets/sprites/Health&Stamina/EnemyBorder.png" id="2_lajxp"]
+[ext_resource type="Texture2D" uid="uid://dgqskk02xkorf" path="res://assets/sprites/Health&Stamina/EnemyColors.png" id="3_lwdgr"]
+
+[node name="EnemyHealthBar" type="Node2D"]
+
+[node name="Health" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = ExtResource("1_x7ygg")
+texture_over = ExtResource("2_lajxp")
+texture_progress = ExtResource("3_lwdgr")
