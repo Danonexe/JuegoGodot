@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://fb6dqbc0mk1a"]
+
+[ext_resource type="Texture2D" uid="uid://dj765btt5ehgs" path="res://assets/sprites/RF_Catacombs_v1.0/candleA_01.png" id="1_otfkl"]
+
+[sub_resource type="Gradient" id="Gradient_vam71"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3vbbg"]
+gradient = SubResource("Gradient_vam71")
+fill = 1
+fill_from = Vector2(0.507123, 0.527066)
+fill_to = Vector2(0.854701, 0.287749)
+
+[node name="vela1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_otfkl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(3.8147e-06, 2)
+scale = Vector2(2.55469, 2.50781)
+texture = SubResource("GradientTexture2D_3vbbg")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ci3w7ogyxekns"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 266.0
+offset_right = 628.0
+offset_bottom = 308.0

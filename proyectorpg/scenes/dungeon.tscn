@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://ckf4owyxl2ori"]
+[gd_scene load_steps=11 format=4 uid="uid://ckf4owyxl2ori"]
 
 [ext_resource type="PackedScene" uid="uid://dle702ty1obas" path="res://scenes/character.tscn" id="2_5atvc"]
 [ext_resource type="PackedScene" uid="uid://cpq4qdmmu45t5" path="res://enemy/goblin.tscn" id="3_pf0b7"]
 [ext_resource type="PackedScene" uid="uid://dbgyb2mxrnkbh" path="res://enemy/slime.tscn" id="4_ica8i"]
 [ext_resource type="PackedScene" uid="uid://gxrbp6igqax0" path="res://world/jarron.tscn" id="5_vtrbx"]
 [ext_resource type="PackedScene" uid="uid://320sjtdus812" path="res://world/estanteria.tscn" id="6_aig45"]
+[ext_resource type="PackedScene" uid="uid://fb6dqbc0mk1a" path="res://world/vela_1.tscn" id="7_07pgj"]
 [ext_resource type="Texture2D" uid="uid://ba0g0ieo2ph28" path="res://assets/sprites/RF_Catacombs_v1.0/mainlevbuild.png" id="7_dll4x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hc73x"]
@@ -1685,6 +1686,9 @@ sources/0 = SubResource("TileSetAtlasSource_5mw1u")
 y_sort_enabled = true
 position = Vector2(1, 0)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.460995, 0.460995, 0.460995, 1)
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_5atvc")]
 position = Vector2(96, 33)
 
@@ -1719,3 +1723,6 @@ position = Vector2(-31, -294)
 
 [node name="Estanteria" parent="." instance=ExtResource("6_aig45")]
 position = Vector2(79, -264)
+
+[node name="vela1" parent="." instance=ExtResource("7_07pgj")]
+position = Vector2(57, -28)
