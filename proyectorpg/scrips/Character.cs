@@ -204,19 +204,39 @@ public partial class Character : CharacterBody2D
 	}
 
 	//areas de ataque
-	private void _on_area_front_attack_body_entered(Node body){
-
-	}
-	private void _on_area_back_attack_body_entered(Node body){
-		
-	}
-
-	private void _on_area_right_attack_body_entered(Node body){
-		
+	// Método que se llama cuando un cuerpo entra en el área de ataque frontal
+	private void _on_area_front_attack_body_entered(Node body)
+	{
+		hit(body);
 	}
 
-	private void _on_area_left_attack_body_entered(Node body){
-		
+	// Método que se llama cuando un cuerpo entra en el área de ataque trasera
+	private void _on_area_back_attack_body_entered(Node body)
+	{
+		hit(body);
+	}
+
+	// Método que se llama cuando un cuerpo entra en el área de ataque derecha
+	private void _on_area_right_attack_body_entered(Node body)
+	{
+		hit(body);
+	}
+
+	// Método que se llama cuando un cuerpo entra en el área de ataque izquierda
+	private void _on_area_left_attack_body_entered(Node body)
+	{
+		hit(body);
+	}
+
+	private void hit(Node body){
+		if (body is Enemy enemy)
+		{
+			enemy.TakeDamage(AttackDamage); 
+		}
+		if (body is ObjetoRompible objeto)
+		{
+			objeto.Romperse(); 
+		}
 	}
 
 

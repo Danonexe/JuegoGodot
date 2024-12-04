@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://320sjtdus812"]
+[gd_scene load_steps=4 format=3 uid="uid://320sjtdus812"]
 
+[ext_resource type="Script" path="res://scrips/Estanteria.cs" id="1_lfhqw"]
 [ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_lja5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh3kk"]
@@ -7,12 +8,19 @@ size = Vector2(37, 14)
 
 [node name="Estanteria" type="StaticBody2D"]
 position = Vector2(0, -6)
-metadata/_edit_group_ = true
+script = ExtResource("1_lfhqw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lja5c")
 region_enabled = true
 region_rect = Rect2(2.39042, 98.3406, 41.5403, 32.8642)
+
+[node name="Sprite2DRoto" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.38, 1)
+texture = ExtResource("1_lja5c")
+region_enabled = true
+region_rect = Rect2(2.26678, 132.2, 42.5334, 31.5333)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 6)

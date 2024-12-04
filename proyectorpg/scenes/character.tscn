@@ -828,6 +828,7 @@ zoom = Vector2(1.5, 1.5)
 visible = false
 collision_layer = 257
 collision_mask = 257
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaFrontAttack"]
 position = Vector2(-1, 16)
@@ -842,6 +843,7 @@ shape = SubResource("CapsuleShape2D_mfxe1")
 visible = false
 collision_layer = 257
 collision_mask = 257
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaBackAttack"]
 position = Vector2(0, -9)
@@ -856,6 +858,7 @@ shape = SubResource("CapsuleShape2D_fqox6")
 visible = false
 collision_layer = 257
 collision_mask = 257
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaRightAttack"]
 position = Vector2(12, 4)
@@ -866,6 +869,7 @@ shape = SubResource("CapsuleShape2D_wnwcl")
 visible = false
 collision_layer = 257
 collision_mask = 257
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaLeftAttack"]
 position = Vector2(-12, 4)

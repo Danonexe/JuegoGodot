@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Jarron : ObjetoRompible
+public partial class Estanteria : ObjetoRompible
 {
 	
 	public override void _Ready()
