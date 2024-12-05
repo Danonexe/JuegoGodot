@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci3w7ogyxekns"]
+
+[ext_resource type="PackedScene" uid="uid://cik5ue2b73wx7" path="res://menu/buttonStart.tscn" id="1_h8dqi"]
+[ext_resource type="Script" path="res://scrips/Menu.cs" id="1_u6b4f"]
+[ext_resource type="Texture2D" uid="uid://c2g5qiuoc5uyp" path="res://assets/mios/Fondo.png" id="2_6l2c1"]
+[ext_resource type="PackedScene" uid="uid://xm1cq7yprq45" path="res://menu/buttonExit.tscn" id="2_280xi"]
+[ext_resource type="Texture2D" uid="uid://clybaasgslpt8" path="res://assets/mios/TextoLogoJuego.png" id="3_53gbl"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -319.0
+offset_right = 576.0
+offset_bottom = 332.0
+script = ExtResource("1_u6b4f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+color = Color(0.184314, 0.129412, 0.121569, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2600, 309)
+scale = Vector2(10, 10)
+texture = ExtResource("2_6l2c1")
+region_rect = Rect2(65.019, 114.021, 191, 69)
+
+[node name="ButtonStart" parent="." instance=ExtResource("1_h8dqi")]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 283.0
+offset_right = 683.0
+offset_bottom = 365.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 322)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Button" parent="." instance=ExtResource("2_280xi")]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 424.0
+offset_right = 657.0
+offset_bottom = 489.0
+
+[node name="TextoLogoJuego" type="Sprite2D" parent="."]
+position = Vector2(576, 126)
+scale = Vector2(7.81646, 7.23418)
+texture = ExtResource("3_53gbl")

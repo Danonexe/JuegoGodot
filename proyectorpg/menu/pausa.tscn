@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://chufj7w1y012c"]
+
+[ext_resource type="Script" path="res://scrips/PausaMenu.cs" id="1_dfoao"]
+
+[node name="Pausa" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dfoao")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -133.0
+offset_right = 26.0
+offset_bottom = -107.0
+text = "Pausa"
+
+[node name="ButtonResume" type="Button" parent="."]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -60.0
+offset_right = 43.0
+offset_bottom = -29.0
+text = "Continuar"
+
+[node name="ButtonGoToMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = -61.0
+offset_top = 12.0
+offset_right = 63.0
+offset_bottom = 43.0
+text = "Volver al menu"
+
+[connection signal="pressed" from="ButtonResume" to="." method="_on_button_resume_pressed"]
+[connection signal="pressed" from="ButtonGoToMenu" to="." method="_on_button_go_to_menu_pressed"]

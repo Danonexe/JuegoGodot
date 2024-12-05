@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cdi2twt8qk324" path="res://assets/sprites/Health&Stamina/StaminaNew.png" id="5_041rv"]
 
 [node name="HealthBar" type="Node2D"]
+z_index = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
