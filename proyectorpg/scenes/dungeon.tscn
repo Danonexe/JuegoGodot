@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ckf4owyxl2ori"]
+[gd_scene load_steps=14 format=4 uid="uid://ckf4owyxl2ori"]
 
 [ext_resource type="PackedScene" uid="uid://dle702ty1obas" path="res://scenes/character.tscn" id="2_5atvc"]
 [ext_resource type="PackedScene" uid="uid://cpq4qdmmu45t5" path="res://enemy/goblin.tscn" id="3_pf0b7"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://320sjtdus812" path="res://world/estanteria.tscn" id="6_aig45"]
 [ext_resource type="PackedScene" uid="uid://fb6dqbc0mk1a" path="res://world/vela_1.tscn" id="7_07pgj"]
 [ext_resource type="Texture2D" uid="uid://ba0g0ieo2ph28" path="res://assets/sprites/RF_Catacombs_v1.0/mainlevbuild.png" id="7_dll4x"]
+[ext_resource type="PackedScene" uid="uid://c1xchqgairelm" path="res://world/vela_2.tscn" id="8_kkuah"]
+[ext_resource type="PackedScene" uid="uid://cexv0v4uuip6s" path="res://world/antorcha.tscn" id="9_71uus"]
+[ext_resource type="PackedScene" uid="uid://dq544p7garn1j" path="res://world/vela_3.tscn" id="10_ml55o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hc73x"]
 
@@ -1724,5 +1727,94 @@ position = Vector2(-31, -294)
 [node name="Estanteria" parent="." instance=ExtResource("6_aig45")]
 position = Vector2(79, -264)
 
-[node name="vela1" parent="." instance=ExtResource("7_07pgj")]
-position = Vector2(57, -28)
+[node name="Light" type="Node" parent="."]
+
+[node name="vela1" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(57, -30)
+
+[node name="vela2" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(137, -29)
+
+[node name="vela3" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(-97, -23)
+
+[node name="vela4" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(69, -164)
+
+[node name="vela5" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(-71, -264)
+
+[node name="vela6" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(168, -299)
+
+[node name="vela7" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(295, 109)
+
+[node name="antorcha" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(225, -60)
+
+[node name="antorcha2" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(-30, -61)
+
+[node name="vela_3" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(122, 255)
+
+[node name="antorcha3" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(225, 227)
+
+[node name="antorcha4" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(321, 227)
+
+[node name="antorcha5" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(-127, 227)
+
+[node name="antorcha6" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(-31, 227)
+
+[node name="vela_4" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(-387, 263)
+
+[node name="vela8" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(-387, 346)
+
+[node name="antorcha7" parent="Light" instance=ExtResource("9_71uus")]
+position = Vector2(49, -334)
+
+[node name="vela9" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(-369, -231)
+
+[node name="vela10" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(-211, -227)
+
+[node name="vela11" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(-371, -364)
+
+[node name="vela_5" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(-235, -362)
+
+[node name="vela_6" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(36, 107)
+
+[node name="vela12" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(-220, 26)
+
+[node name="vela13" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(-321, -66)
+
+[node name="vela_7" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(533, 267)
+
+[node name="vela_8" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(-215, 306)
+
+[node name="vela14" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(32, 347)
+
+[node name="vela_9" parent="Light" instance=ExtResource("10_ml55o")]
+position = Vector2(435, 61)
+
+[node name="vela15" parent="Light" instance=ExtResource("7_07pgj")]
+position = Vector2(508, 61)
+
+[node name="vela16" parent="Light" instance=ExtResource("8_kkuah")]
+position = Vector2(414, 347)

@@ -3,7 +3,7 @@ using System;
 
 public partial class Character : CharacterBody2D
 {
-	// Enumeración para los estados del personaje
+	// Estados del personaje
 	private enum CharacterState
 	{
 		Idle,       
@@ -16,16 +16,17 @@ public partial class Character : CharacterBody2D
 	[Export] public float MaxStamina { get; private set; } = 85; 
 	[Export] public float CurrentHealth { get; private set; } 
 	[Export] public float CurrentStamina { get; private set; } 
+	[Export] public float AttackStaminaCost { get; private set; } = 35f; //Estamina del ataque
+	[Export] public int AttackDamage { get; private set; } = 20; 
 
 	// Constantes de movimiento
 	private const float MaxSpeed = 110.0f; 
 	private const float Acceleration = 500.0f; 
 	private const float Friction = 500.0f; 
 
-	// Constantes de ataque
+	// Variables para el ataque no estadísticas
 	private const int AttackFrames = 30; // Duración del ataque en fotogramas
-	private const float AttackStaminaCost = 35f; // Resistencia del ataque
-	private const int AttackDamage = 20; 
+	
 
 	// Gestión del estado
 	private CharacterState _currentState = CharacterState.Idle; 
@@ -58,7 +59,7 @@ public partial class Character : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Regenerar resistencia
+		// Regenerar estamina
 		RegenerateStamina();
 
 		// Manejar el estado actual
@@ -130,7 +131,7 @@ public partial class Character : CharacterBody2D
 		_currentAttackFrame = 0;
 		CurrentStamina -= AttackStaminaCost;
 
-		// Determinar animación del ataque según la última dirección
+		// Determinar última dirección
 		string attackAnimation = DetermineAttackAnimation();
 		_animatedSprite.Play(attackAnimation);
 
@@ -145,7 +146,7 @@ public partial class Character : CharacterBody2D
 		_currentAttackFrame = 0;
 		UpdateAnimation(_lastDirection, false);
 
-		// Desactivar todas las áreas de ataque después de finalizar el ataque
+		// Desactivar todas las áreas de ataque
 		DeactivateAllAttackAreas();
 	}
 
@@ -182,7 +183,7 @@ public partial class Character : CharacterBody2D
 
 	private void ActivateAttackArea()
 	{
-		// Desactivar todas las áreas antes de activar la correcta
+		// Por si acaso de nuevo
 		DeactivateAllAttackAreas();
 
 		// Activar el área de ataque según la dirección
@@ -203,26 +204,22 @@ public partial class Character : CharacterBody2D
 		}
 	}
 
-	//areas de ataque
-	// Método que se llama cuando un cuerpo entra en el área de ataque frontal
+	//Areas de ataque
 	private void _on_area_front_attack_body_entered(Node body)
 	{
 		hit(body);
 	}
 
-	// Método que se llama cuando un cuerpo entra en el área de ataque trasera
 	private void _on_area_back_attack_body_entered(Node body)
 	{
 		hit(body);
 	}
 
-	// Método que se llama cuando un cuerpo entra en el área de ataque derecha
 	private void _on_area_right_attack_body_entered(Node body)
 	{
 		hit(body);
 	}
 
-	// Método que se llama cuando un cuerpo entra en el área de ataque izquierda
 	private void _on_area_left_attack_body_entered(Node body)
 	{
 		hit(body);
@@ -262,7 +259,7 @@ public partial class Character : CharacterBody2D
 	// Salud y Stamina
 	private void RegenerateStamina()
 	{
-		// Regenerar resistencia poco a poco
+		// Regenerar resistencia
 		CurrentStamina = Math.Min(CurrentStamina + 0.35f, MaxStamina);
 		UpdateHealthAndStaminaBars();
 	}

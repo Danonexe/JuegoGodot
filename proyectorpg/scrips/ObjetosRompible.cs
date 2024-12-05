@@ -3,7 +3,8 @@ using System;
 
 public partial class ObjetoRompible : StaticBody2D
 {
-	
+	// Clase de la que heredan todas las cosas que se rompen, comentar y añadir que puedan soltar vida o perks
+
 	protected Sprite2D SpriteNormal;
 	protected Sprite2D SpriteRoto;
 

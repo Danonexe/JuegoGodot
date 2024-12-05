@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq544p7garn1j"]
+
+[ext_resource type="Texture2D" uid="uid://sqjhcqds4er5" path="res://assets/sprites/RF_Catacombs_v1.0/candleB_02.png" id="1_nriw2"]
+[ext_resource type="Texture2D" uid="uid://bsnqg1nfnlvwm" path="res://assets/sprites/RF_Catacombs_v1.0/candleB_03.png" id="2_8a11m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mvku6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nriw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8a11m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_vogty"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cemqv"]
+gradient = SubResource("Gradient_vogty")
+fill = 1
+fill_from = Vector2(0.507123, 0.527066)
+fill_to = Vector2(0.854701, 0.287749)
+
+[node name="vela_3" type="Node2D"]
+z_index = -1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mvku6")
+autoplay = "default"
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(3.8147e-06, 2)
+scale = Vector2(2.55469, 2.50781)
+texture = SubResource("GradientTexture2D_cemqv")

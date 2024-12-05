@@ -3,6 +3,8 @@ using System;
 
 public partial class Slime : Enemy
 {
+	// Arreglar, pasar cosas al padre y poner bonito
+
 	private bool isAttacking = false;
 
 	public override void _Ready()
@@ -22,7 +24,7 @@ public partial class Slime : Enemy
 
 	private void OnAttackAnimationFinished()
 	{
-		// Restablecer el estado de ataque cuando la animación de ataque termine
+		// Solución temporal
 		if (isAttacking)
 		{
 			isAttacking = false;
@@ -31,7 +33,7 @@ public partial class Slime : Enemy
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Actualizar la barra de salud
+		// Esto debería tenerlo el padre CAMBIAR
 		healthBar.Value = currentHealth;
 
 		if (characterChase && character != null)
@@ -69,7 +71,7 @@ public partial class Slime : Enemy
 
 	private void HandleAttack(Vector2 direction, double delta)
 	{
-		// Iniciar la animación de ataque si no está atacando ya
+		// Iniciar la animación de ataque si no está atacando ya FUNCIONA MAL
 		if (!isAttacking)
 		{
 			_animatedSprite.Play("attack");
@@ -87,14 +89,14 @@ public partial class Slime : Enemy
 
 	private void PerformAttack(Vector2 direction)
 	{
-		// Iniciar el tiempo de espera para el ataque
+		// Iniciar el cooldown para el ataque
 		attackCooldown.Start();
 		
 		Vector2 knockbackDirection = direction.Normalized();
 		
 		if (character is Character characterBody)
 		{
-			// Aplicar retroceso y daño al personaje
+			// Aplicar retroceso y daño al character
 			characterBody.Velocity = knockbackDirection * KNOCKBACK_FORCE;
 			characterBody.TakeDamage(damage);
 		}

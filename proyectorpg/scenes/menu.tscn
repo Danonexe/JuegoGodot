@@ -1,19 +1,40 @@
-[gd_scene format=3 uid="uid://ci3w7ogyxekns"]
+[gd_scene load_steps=2 format=3 uid="uid://ci3w7ogyxekns"]
+
+[sub_resource type="Theme" id="Theme_d1jdg"]
+default_font_size = 32
 
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 649.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1154.0
 offset_bottom = 649.0
+color = Color(0.184314, 0.129412, 0.121569, 1)
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 467.0
-offset_top = 266.0
-offset_right = 628.0
-offset_bottom = 308.0
+offset_left = 477.0
+offset_top = 328.0
+offset_right = 693.0
+offset_bottom = 388.0
+text = "Empezar a jugar"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 478.0
+offset_top = 429.0
+offset_right = 694.0
+offset_bottom = 489.0
+text = "Salir"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 149.0
+offset_right = 730.0
+offset_bottom = 298.0
+theme = SubResource("Theme_d1jdg")
+text = "Leveling Dungeon"

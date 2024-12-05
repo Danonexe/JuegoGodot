@@ -3,6 +3,7 @@ using System;
 
 public partial class Enemy : CharacterBody2D
 {
+	// Clase de la que van a heredar todos los enemigos
 	// Estadísticas del enemigo
 	protected int maxHealth = 100;
 	protected int currentHealth;
@@ -41,6 +42,7 @@ public partial class Enemy : CharacterBody2D
 		healthBar.Hide();
 	}
 
+	// Pequeño cooldown
 	protected virtual void OnStartDelayTimeout()
 	{
 		gameStarted = true;
@@ -62,11 +64,11 @@ public partial class Enemy : CharacterBody2D
 	{
 		_animatedSprite.Play("death");
 		speed=0;
-		//esperar 3 segundos
+		//esperar 3 segundos AÑADIR CUANDO TENGA TIEMPO
 		QueueFree();
 	}
 
-	// Detectar el character
+	// Detectar al character
 	protected virtual void _on_detection_area_body_entered(Node body)
 	{
 		if (gameStarted && body is Node2D && character == null)
@@ -90,6 +92,7 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	// ARREGLAR LA ANIMACIÓN CUANDO TENGA TIEMPO
 	// Area de ataque
 	protected virtual void _on_attack_area_body_entered(Node body)
 	{
