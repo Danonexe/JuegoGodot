@@ -7,12 +7,18 @@ size = Vector2(30, 10)
 
 [node name="2baules" type="StaticBody2D"]
 position = Vector2(0, -9)
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_55jcq")
 region_enabled = true
 region_rect = Rect2(128.245, 67.9776, 33.7213, 28.0608)
+
+[node name="Sprite2DRoto" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 7)
+texture = ExtResource("1_55jcq")
+region_enabled = true
+region_rect = Rect2(126.963, 95.9959, 36.4444, 18.0741)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

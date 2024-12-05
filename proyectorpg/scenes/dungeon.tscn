@@ -1697,6 +1697,7 @@ color = Color(0.460995, 0.460995, 0.460995, 1)
 position = Vector2(96, 33)
 
 [node name="Pausa" parent="CharacterBody2D" instance=ExtResource("2_tqbww")]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, -3)
