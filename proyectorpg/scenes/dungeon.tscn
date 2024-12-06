@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ckf4owyxl2ori"]
+[gd_scene load_steps=16 format=4 uid="uid://ckf4owyxl2ori"]
 
 [ext_resource type="PackedScene" uid="uid://dle702ty1obas" path="res://scenes/character.tscn" id="2_5atvc"]
 [ext_resource type="PackedScene" uid="uid://chufj7w1y012c" path="res://menu/pausa.tscn" id="2_tqbww"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c1xchqgairelm" path="res://world/vela_2.tscn" id="8_kkuah"]
 [ext_resource type="PackedScene" uid="uid://cexv0v4uuip6s" path="res://world/antorcha.tscn" id="9_71uus"]
 [ext_resource type="PackedScene" uid="uid://dq544p7garn1j" path="res://world/vela_3.tscn" id="10_ml55o"]
+[ext_resource type="PackedScene" uid="uid://bmr5jdl15ahqp" path="res://world/paloConPlato.tscn" id="12_4obmc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hc73x"]
 
@@ -1732,99 +1733,133 @@ position = Vector2(199, -21)
 position = Vector2(-31, -294)
 
 [node name="Estanteria" parent="." instance=ExtResource("6_aig45")]
-position = Vector2(79, -264)
+position = Vector2(107, -295)
+
+[node name="paloConPlato" parent="." instance=ExtResource("12_4obmc")]
+position = Vector2(-64, 7)
 
 [node name="Light" type="Node" parent="."]
 
 [node name="vela1" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(57, -30)
+metadata/_edit_lock_ = true
 
 [node name="vela2" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(137, -29)
+metadata/_edit_lock_ = true
 
 [node name="vela3" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-97, -23)
+metadata/_edit_lock_ = true
 
 [node name="vela4" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(69, -164)
+metadata/_edit_lock_ = true
 
 [node name="vela5" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-71, -264)
+metadata/_edit_lock_ = true
 
 [node name="vela6" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(168, -299)
+metadata/_edit_lock_ = true
 
 [node name="vela7" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(295, 109)
+metadata/_edit_lock_ = true
 
 [node name="antorcha" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(225, -60)
+metadata/_edit_lock_ = true
 
 [node name="antorcha2" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(-30, -61)
+metadata/_edit_lock_ = true
 
 [node name="vela_3" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(122, 255)
+metadata/_edit_lock_ = true
 
 [node name="antorcha3" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(225, 227)
+metadata/_edit_lock_ = true
 
 [node name="antorcha4" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(321, 227)
+metadata/_edit_lock_ = true
 
 [node name="antorcha5" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(-127, 227)
+metadata/_edit_lock_ = true
 
 [node name="antorcha6" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(-31, 227)
+metadata/_edit_lock_ = true
 
 [node name="vela_4" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(-387, 263)
+metadata/_edit_lock_ = true
 
 [node name="vela8" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-387, 346)
+metadata/_edit_lock_ = true
 
 [node name="antorcha7" parent="Light" instance=ExtResource("9_71uus")]
 position = Vector2(49, -334)
+metadata/_edit_lock_ = true
 
 [node name="vela9" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-369, -231)
+metadata/_edit_lock_ = true
 
 [node name="vela10" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(-211, -227)
+metadata/_edit_lock_ = true
 
 [node name="vela11" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(-371, -364)
+metadata/_edit_lock_ = true
 
 [node name="vela_5" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(-235, -362)
+metadata/_edit_lock_ = true
 
 [node name="vela_6" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(36, 107)
+metadata/_edit_lock_ = true
 
 [node name="vela12" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(-220, 26)
+metadata/_edit_lock_ = true
 
 [node name="vela13" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-321, -66)
+metadata/_edit_lock_ = true
 
 [node name="vela_7" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(533, 267)
+metadata/_edit_lock_ = true
 
 [node name="vela_8" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(-215, 306)
+metadata/_edit_lock_ = true
 
 [node name="vela14" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(32, 347)
+metadata/_edit_lock_ = true
 
 [node name="vela_9" parent="Light" instance=ExtResource("10_ml55o")]
 position = Vector2(435, 61)
+metadata/_edit_lock_ = true
 
 [node name="vela15" parent="Light" instance=ExtResource("7_07pgj")]
 position = Vector2(508, 61)
+metadata/_edit_lock_ = true
 
 [node name="vela16" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(414, 347)
+metadata/_edit_lock_ = true
 
 [node name="vela17" parent="Light" instance=ExtResource("8_kkuah")]
 position = Vector2(-234, 158)
+metadata/_edit_lock_ = true

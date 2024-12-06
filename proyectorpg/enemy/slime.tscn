@@ -1,10 +1,11 @@
-[gd_scene load_steps=51 format=3 uid="uid://dbgyb2mxrnkbh"]
+[gd_scene load_steps=56 format=3 uid="uid://dbgyb2mxrnkbh"]
 
 [ext_resource type="Texture2D" uid="uid://dtc7pnl0h02a8" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_idle.png" id="1_inx45"]
 [ext_resource type="Script" path="res://scrips/Slime.cs" id="1_r8k53"]
 [ext_resource type="Texture2D" uid="uid://dw3uv5dhj7b3o" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_walk.png" id="2_ae4d0"]
 [ext_resource type="Texture2D" uid="uid://b43ibspfu6gre" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_attack.png" id="2_ypnvp"]
 [ext_resource type="Texture2D" uid="uid://fga4tre26vsn" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_death.png" id="3_f1gso"]
+[ext_resource type="Texture2D" uid="uid://7qt3wfmrgfy3" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_hurt.png" id="4_x647s"]
 [ext_resource type="PackedScene" uid="uid://bvj4n08ncbxtl" path="res://enemy/enemy_health_bar.tscn" id="5_x4e0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4b4d"]
@@ -114,6 +115,22 @@ region = Rect2(640, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rp4au"]
 atlas = ExtResource("3_f1gso")
 region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfxkg"]
+atlas = ExtResource("4_x647s")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgbog"]
+atlas = ExtResource("4_x647s")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvf2f"]
+atlas = ExtResource("4_x647s")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd5gq"]
+atlas = ExtResource("4_x647s")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hhmo"]
 atlas = ExtResource("1_inx45")
@@ -258,6 +275,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dfxkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgbog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvf2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd5gq")
+}],
+"loop": true,
+"name": &"getHit",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4hhmo")
 }, {
 "duration": 1.0,
@@ -310,8 +344,7 @@ radius = 4.0
 radius = 104.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0m50a"]
-radius = 8.0
-height = 16.0
+height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4dg0"]
 
@@ -324,7 +357,7 @@ position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_r0100")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.981116
+frame_progress = 0.353174
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -5,7 +5,6 @@ public partial class PausaMenu : Control
 {
     public override void _Ready()
     {
-        // Asegúrate de que el menú pueda recibir entrada cuando el juego está pausado
         ProcessMode = ProcessModeEnum.Always;
         Visible = false;
     }
