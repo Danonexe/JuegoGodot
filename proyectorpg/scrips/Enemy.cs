@@ -188,23 +188,23 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-	private void ProcessDeathState(double delta){
-		_currentDEATHFrame++;
+	private void ProcessDeathState(double delta)
+	{
+	_currentDEATHFrame++;
 
-		// Reproducir animación de recibir golpe
-		if (_currentDEATHFrame == 1)
-		{
-			_animatedSprite.Play("death");
-		}
+   // Animación y muerte
+	if (_currentDEATHFrame == 1)
+	{
+		_animatedSprite.Play("death");
+	}
 
-		// Finalizar estado de golpe
-		if (_currentDEATHFrame >= DEATH_FRAMES)
-		{
-			QueueFree();
-			_currentDEATHFrame = 0;
-		}
-			QueueFree();
-	}	
+  
+	if (_currentDEATHFrame >= DEATH_FRAMES)
+	{
+		QueueFree();
+		_currentDEATHFrame = 0;
+	}
+}
 
 	private void PerformAttack()
 	{
