@@ -10,4 +10,4 @@ Este proyecto es un juego de mazmorreo en el que tanto el jugador como los enemi
 - **Desarrollado con el motor de juego Godot**: El proyecto está construido usando el motor de juego Godot, lo que permite una experiencia de desarrollo ágil y eficiente.
 
 ## Estado actual:
-El juego se encuentra en fase de desarrollo activo. El sistema de combate sigue siendo optimizado y se están agregando nuevas mecánicas de juego.
+El juego se encuentra en fase de desarrollo activo. El sistema de subida de nivel sigue en proceso y se están agregando nuevas mecánicas de juego.
