@@ -8,7 +8,8 @@ public partial class Character : CharacterBody2D
 	{
 		Idle,       
 		Moving,     
-		Attacking  
+		Attacking,
+		Death  
 	}
 
 	// Estadísticas del personaje
@@ -27,6 +28,9 @@ public partial class Character : CharacterBody2D
 	// Variables para el ataque no estadísticas
 	private const int AttackFrames = 30; // Duración del ataque en fotogramas
 	
+	// Variables para muerte
+	private const int DeathFrames = 45; // Duración de la animación de muerte
+	private int _currentDeathFrame = 0;
 
 	// Gestión del estado
 	private CharacterState _currentState = CharacterState.Idle; 
@@ -59,8 +63,11 @@ public partial class Character : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Regenerar estamina
-		RegenerateStamina();
+		// Solo regenerar estamina si no está muerto
+		if (_currentState != CharacterState.Death)
+		{
+			RegenerateStamina();
+		}
 
 		// Manejar el estado actual
 		switch (_currentState)
@@ -72,11 +79,17 @@ public partial class Character : CharacterBody2D
 			case CharacterState.Moving:
 				ProcessMovementState(delta);
 				break;
+			case CharacterState.Death:
+				ProcessDeathState(delta);
+				break;
 		}
 	}
 
 	private void ProcessMovementState(double delta)
 	{
+		// Bloquear movimiento si estás muerto
+		if (_currentState == CharacterState.Death) return;
+
 		// Obtener dirección de entrada
 		_currentDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
 
@@ -96,6 +109,9 @@ public partial class Character : CharacterBody2D
 			_currentState = CharacterState.Idle;
 			UpdateAnimation(_lastDirection, false);
 		}
+
+		// Bloquear ataque si estás muerto
+		if (_currentState == CharacterState.Death) return;
 
 		// Manejar ataque
 		if (Input.IsActionJustPressed("ui_accept") && CanAttack())
@@ -118,10 +134,32 @@ public partial class Character : CharacterBody2D
 		}
 	}
 
+	private void ProcessDeathState(double delta)
+	{
+		_currentDeathFrame++;
+
+		// Reproducir animación de muerte
+		if (_currentDeathFrame == 1)
+		{
+			_animatedSprite.Play("death");
+		}
+
+		// Finalizar y eliminar el personaje
+		if (_currentDeathFrame >= DeathFrames)
+		{
+			_animatedSprite.Visible=false;
+			if(_currentDeathFrame>=60){
+				  GetTree().ChangeSceneToFile("res://menu/menu.tscn");
+			}
+		}
+	}
+
 	private bool CanAttack()
 	{
-		// Verificar si el personaje puede atacar
-		return _currentState != CharacterState.Attacking && CurrentStamina >= AttackStaminaCost;
+		// No se puede atacar si estás muerto
+		return _currentState != CharacterState.Attacking 
+            && _currentState != CharacterState.Death 
+            && CurrentStamina >= AttackStaminaCost;
 	}
 
 	private void StartAttack()
@@ -236,7 +274,6 @@ public partial class Character : CharacterBody2D
 		}
 	}
 
-
 	private void DeactivateAllAttackAreas()
 	{
 		// Desactivar todas las áreas de golpe
@@ -273,10 +310,22 @@ public partial class Character : CharacterBody2D
 
 	public void TakeDamage(int damage)
 	{
-		// Reducir daño añadir defensa y más cosas
+		// Reducir daño
 		CurrentHealth = Math.Max(0, CurrentHealth - damage);
 		UpdateHealthAndStaminaBars();
-		ShakeCameraOnHit();
+		
+		// Si la salud llega a 0, cambiar al estado de muerte
+		if (CurrentHealth <= 30)
+		{
+			_currentState = CharacterState.Death;
+			_currentDeathFrame = 0;
+			// Detener cualquier movimiento o acción
+			Velocity = Vector2.Zero;
+		}
+		else
+		{
+			ShakeCameraOnHit();
+		}
 	}
 
 	private void ShakeCameraOnHit()
