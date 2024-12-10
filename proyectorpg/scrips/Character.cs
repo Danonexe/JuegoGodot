@@ -158,8 +158,8 @@ public partial class Character : CharacterBody2D
 	{
 		// No se puede atacar si estás muerto
 		return _currentState != CharacterState.Attacking 
-            && _currentState != CharacterState.Death 
-            && CurrentStamina >= AttackStaminaCost;
+			&& _currentState != CharacterState.Death 
+			&& CurrentStamina >= AttackStaminaCost;
 	}
 
 	private void StartAttack()

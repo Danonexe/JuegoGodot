@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://8u40a0p34d78"]
+
+[ext_resource type="Script" path="res://scrips/Menu.cs" id="1_ok0cw"]
+[ext_resource type="Texture2D" uid="uid://c2g5qiuoc5uyp" path="res://assets/mios/Fondo.png" id="2_nyp7q"]
+[ext_resource type="PackedScene" uid="uid://cik5ue2b73wx7" path="res://menu/buttonStart.tscn" id="3_5o2sd"]
+[ext_resource type="PackedScene" uid="uid://xm1cq7yprq45" path="res://menu/buttonExit.tscn" id="4_5gbti"]
+
+[sub_resource type="Theme" id="Theme_rmdre"]
+default_font_size = 100
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -319.0
+offset_right = 576.0
+offset_bottom = 332.0
+script = ExtResource("1_ok0cw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+color = Color(0.184314, 0.129412, 0.121569, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2600, 309)
+scale = Vector2(10, 10)
+texture = ExtResource("2_nyp7q")
+region_rect = Rect2(65.019, 114.021, 191, 69)
+
+[node name="ButtonStart" parent="." instance=ExtResource("3_5o2sd")]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 283.0
+offset_right = 683.0
+offset_bottom = 365.0
+text = "Volver a jugar"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 322)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Button" parent="." instance=ExtResource("4_5gbti")]
+layout_mode = 0
+offset_left = 493.0
+offset_top = 424.0
+offset_right = 657.0
+offset_bottom = 489.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 70.0
+offset_right = 936.0
+offset_bottom = 234.0
+theme = SubResource("Theme_rmdre")
+text = "¡Has escapado!"
