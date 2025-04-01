@@ -1,7 +1,7 @@
 [gd_scene load_steps=56 format=3 uid="uid://dbgyb2mxrnkbh"]
 
 [ext_resource type="Texture2D" uid="uid://dtc7pnl0h02a8" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_idle.png" id="1_inx45"]
-[ext_resource type="Script" path="res://scrips/Slime.cs" id="1_r8k53"]
+[ext_resource type="Script" uid="uid://dbe0g3yll2ani" path="res://scrips/Slime.cs" id="1_r8k53"]
 [ext_resource type="Texture2D" uid="uid://dw3uv5dhj7b3o" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_walk.png" id="2_ae4d0"]
 [ext_resource type="Texture2D" uid="uid://b43ibspfu6gre" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_attack.png" id="2_ypnvp"]
 [ext_resource type="Texture2D" uid="uid://fga4tre26vsn" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_death.png" id="3_f1gso"]

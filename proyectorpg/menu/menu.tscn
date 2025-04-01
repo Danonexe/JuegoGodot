@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ci3w7ogyxekns"]
 
 [ext_resource type="PackedScene" uid="uid://cik5ue2b73wx7" path="res://menu/buttonStart.tscn" id="1_h8dqi"]
-[ext_resource type="Script" path="res://scrips/Menu.cs" id="1_u6b4f"]
+[ext_resource type="Script" uid="uid://i70m7fj4ebrh" path="res://scrips/Menu.cs" id="1_u6b4f"]
 [ext_resource type="Texture2D" uid="uid://c2g5qiuoc5uyp" path="res://assets/mios/Fondo.png" id="2_6l2c1"]
 [ext_resource type="PackedScene" uid="uid://xm1cq7yprq45" path="res://menu/buttonExit.tscn" id="2_280xi"]
 [ext_resource type="Texture2D" uid="uid://clybaasgslpt8" path="res://assets/mios/TextoLogoJuego.png" id="3_53gbl"]

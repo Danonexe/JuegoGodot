@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://gxrbp6igqax0"]
 
-[ext_resource type="Script" path="res://scrips/Jarron.cs" id="1_ia1o1"]
+[ext_resource type="Script" uid="uid://ch2g6qjrytxk3" path="res://scrips/Jarron.cs" id="1_ia1o1"]
 [ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_wrkt8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sts8o"]

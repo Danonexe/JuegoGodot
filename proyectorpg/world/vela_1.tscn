@@ -32,7 +32,7 @@ fill_to = Vector2(0.854701, 0.287749)
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_lymdx")
 autoplay = "default"
-frame_progress = 0.169278
+frame_progress = 0.750537
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(3.8147e-06, 2)

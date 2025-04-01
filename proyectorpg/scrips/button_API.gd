@@ -31,11 +31,30 @@ func _on_button_pressed():
 	# Deshabilitar el botón mientras se procesa
 	disabled = true
 	
+	# Generar valores falsos para puntuación y tiempo
+	var fake_score = randi_range(100, 1000)  # Puntuación aleatoria entre 100 y 1000
+	var fake_time = str(randi_range(30, 300))  # Tiempo aleatorio entre 30 y 300 segundos
+	
+	# La fecha se generará automáticamente en el servidor, pero podríamos enviarla si quisiéramos
+	# var current_date = Time.get_datetime_string_from_system(false, true)  # formato: DD/MM/YYYY HH:MM:SS
+	
+	# Obtener la fecha actual en formato DD/MM/YYYY HH:MM:SS
+	var datetime = Time.get_datetime_dict_from_system()
+	var current_date = "%02d/%02d/%04d %02d:%02d:%02d" % [
+		datetime.day, 
+		datetime.month, 
+		datetime.year,
+		datetime.hour,
+		datetime.minute,
+		datetime.second
+	]
+	
 	var data = {
-		"Id": "",
+		"Id": "",  # Usamos "Id" con I mayúscula y cadena vacía
 		"nick": nick,
-		"score": 0,
-		"time": 0
+		"score": fake_score,
+		"time": fake_time,
+		"date": current_date  # Incluimos la fecha desde el cliente
 	}
 	
 	# Convertir a JSON
@@ -54,7 +73,7 @@ func _on_button_pressed():
 	
 	# Verificar si hubo un error al iniciar la solicitud
 	if error != OK:
-		print_debug("Error al conectar con el servidor")
+		print_debug("Error al conectar con el servidor: " + str(error))
 		disabled = false
 
 # Función que se llama cuando se completa la solicitud HTTP
@@ -63,15 +82,18 @@ func _on_request_completed(result, response_code, headers, body):
 	
 	# Verificar si la solicitud fue exitosa
 	if result != HTTPRequest.RESULT_SUCCESS:
-		print_debug("Error de conexión")
+		print_debug("Error de conexión: " + str(result))
 		return
 	
 	# Verificar el código de respuesta HTTP
 	if response_code == 201 or response_code == 200:  # Creado exitosamente
 		print_debug("¡Nick registrado con éxito!")
+		# Mostrar la respuesta del servidor para depuración
+		var response_text = body.get_string_from_utf8()
+		print_debug("Respuesta del servidor: " + response_text)
 		line_edit.text = ""  # Limpiar el campo
 	else:
 		# Mostrar error en la consola
 		var response_text = body.get_string_from_utf8()
-		print_debug("Error del servidor: ", response_code)
-		print_debug("Respuesta: ", response_text)
+		print_debug("Error del servidor: " + str(response_code))
+		print_debug("Respuesta: " + response_text)

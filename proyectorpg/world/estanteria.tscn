@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://320sjtdus812"]
 
-[ext_resource type="Script" path="res://scrips/Estanteria.cs" id="1_lfhqw"]
+[ext_resource type="Script" uid="uid://7jd8xwbxlc8m" path="res://scrips/Estanteria.cs" id="1_lfhqw"]
 [ext_resource type="Texture2D" uid="uid://d0k6phkdh488" path="res://assets/sprites/RF_Catacombs_v1.0/decorative.png" id="1_lja5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh3kk"]

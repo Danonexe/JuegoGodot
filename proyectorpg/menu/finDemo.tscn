@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://8u40a0p34d78"]
 
-[ext_resource type="Script" path="res://scrips/Menu.cs" id="1_ok0cw"]
+[ext_resource type="Script" uid="uid://i70m7fj4ebrh" path="res://scrips/Menu.cs" id="1_ok0cw"]
 [ext_resource type="Texture2D" uid="uid://c2g5qiuoc5uyp" path="res://assets/mios/Fondo.png" id="2_nyp7q"]
 [ext_resource type="PackedScene" uid="uid://cik5ue2b73wx7" path="res://menu/buttonStart.tscn" id="3_5o2sd"]
-[ext_resource type="Script" path="res://scrips/button_API.gd" id="3_48pyx"]
+[ext_resource type="Script" uid="uid://u8pjt6a4mkcy" path="res://scrips/button_API.gd" id="3_48pyx"]
 [ext_resource type="PackedScene" uid="uid://xm1cq7yprq45" path="res://menu/buttonExit.tscn" id="4_5gbti"]
 
 [sub_resource type="Theme" id="Theme_rmdre"]
@@ -26,6 +26,7 @@ color = Color(0.184314, 0.129412, 0.121569, 1)
 
 [node name="ButtonAPI" parent="." instance=ExtResource("4_5gbti")]
 z_index = 3
+layout_mode = 0
 offset_left = 634.0
 offset_top = 303.0
 offset_right = 739.0

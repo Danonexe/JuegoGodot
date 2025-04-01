@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://xm1cq7yprq45"]
 
-[ext_resource type="Script" path="res://scrips/ButtonExit.cs" id="1_1iwix"]
+[ext_resource type="Script" uid="uid://c50m1tuxrmx7e" path="res://scrips/ButtonExit.cs" id="1_1iwix"]
 
 [node name="Button" type="Button"]
 offset_right = 8.0
