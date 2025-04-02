@@ -31,12 +31,21 @@ func _on_button_pressed():
 	# Deshabilitar el botón mientras se procesa
 	disabled = true
 	
-	# Generar valores falsos para puntuación y tiempo
+	# Generar valor para puntuación
 	var fake_score = randi_range(100, 1000)  # Puntuación aleatoria entre 100 y 1000
-	var fake_time = str(randi_range(30, 300))  # Tiempo aleatorio entre 30 y 300 segundos
 	
-	# La fecha se generará automáticamente en el servidor, pero podríamos enviarla si quisiéramos
-	# var current_date = Time.get_datetime_string_from_system(false, true)  # formato: DD/MM/YYYY HH:MM:SS
+	# Obtener el tiempo real del temporizador global
+	var temporizador = get_node("/root/Temporizador")
+	var tiempo_formateado = "00:00.00"  # Valor predeterminado
+	
+	if temporizador != null:
+		# Obtener el tiempo final (usando get_time en lugar de get_current_time)
+		var tiempo_final = temporizador.get_time()
+		# Formatear el tiempo usando el método format_time del temporizador
+		tiempo_formateado = temporizador.format_time(tiempo_final)
+		print_debug("Tiempo formateado para enviar: " + tiempo_formateado)
+	else:
+		print_debug("No se pudo acceder al temporizador, usando valor predeterminado")
 	
 	# Obtener la fecha actual en formato DD/MM/YYYY HH:MM:SS
 	var datetime = Time.get_datetime_dict_from_system()
@@ -53,7 +62,7 @@ func _on_button_pressed():
 		"Id": "",  # Usamos "Id" con I mayúscula y cadena vacía
 		"nick": nick,
 		"score": fake_score,
-		"time": fake_time,
+		"time": tiempo_formateado,  # Usamos el tiempo formateado
 		"date": current_date  # Incluimos la fecha desde el cliente
 	}
 	
