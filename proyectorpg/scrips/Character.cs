@@ -12,13 +12,8 @@ public partial class Character : CharacterBody2D
 		Death  
 	}
 
-	// Estadísticas del personaje
-	[Export] public int MaxHealth { get; private set; } = 100; 
-	[Export] public float MaxStamina { get; private set; } = 85; 
-	[Export] public float CurrentHealth { get; private set; } 
-	[Export] public float CurrentStamina { get; private set; } 
-	[Export] public float AttackStaminaCost { get; private set; } = 35f; //Estamina del ataque
-	[Export] public int AttackDamage { get; private set; } = 20; 
+	// Referencias al sistema de estadísticas global
+	private Node characterStats;
 
 	// Constantes de movimiento
 	private const float MaxSpeed = 110.0f; 
@@ -48,6 +43,13 @@ public partial class Character : CharacterBody2D
 
 	public override void _Ready()
 	{
+		// Obtener referencia a CharacterStats
+		characterStats = GetNode<Node>("/root/CharacterStats");
+		
+		// Conectar a las señales de CharacterStats
+		characterStats.Connect("health_changed", Callable.From((float newHealth) => UpdateHealthBar(newHealth)));
+		characterStats.Connect("stamina_changed", Callable.From((float newStamina) => UpdateStaminaBar(newStamina)));
+
 		// Inicializar nodos
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		var healthStaminaBar = GetNode<Node2D>("HealthBar");
@@ -55,9 +57,7 @@ public partial class Character : CharacterBody2D
 		_healthBar = healthStaminaBar.GetNode<TextureProgressBar>("Health");
 		_camera = GetNode<Camera2D>("Camera2D");
 
-		// Establecer estadísticas iniciales
-		CurrentHealth = MaxHealth;
-		CurrentStamina = MaxStamina;
+		// Actualizar las barras con valores iniciales de CharacterStats
 		UpdateHealthAndStaminaBars();
 	}
 
@@ -156,10 +156,14 @@ public partial class Character : CharacterBody2D
 
 	private bool CanAttack()
 	{
-		// No se puede atacar si estás muerto
+		// Obtener estamina de CharacterStats
+		float currentStamina = (float)characterStats.Get("current_stamina");
+		float attackStaminaCost = 35f; // Coste de estamina del ataque
+		
+		// No se puede atacar si estás muerto o sin suficiente estamina
 		return _currentState != CharacterState.Attacking 
 			&& _currentState != CharacterState.Death 
-			&& CurrentStamina >= AttackStaminaCost;
+			&& currentStamina >= attackStaminaCost;
 	}
 
 	private void StartAttack()
@@ -167,7 +171,11 @@ public partial class Character : CharacterBody2D
 		// Iniciar ataque
 		_currentState = CharacterState.Attacking;
 		_currentAttackFrame = 0;
-		CurrentStamina -= AttackStaminaCost;
+		
+		// Reducir estamina
+		float currentStamina = (float)characterStats.Get("current_stamina");
+		float attackStaminaCost = 35f;
+		characterStats.Call("set_stamina", currentStamina - attackStaminaCost);
 
 		// Determinar última dirección
 		string attackAnimation = DetermineAttackAnimation();
@@ -266,7 +274,9 @@ public partial class Character : CharacterBody2D
 	private void hit(Node body){
 		if (body is Enemy enemy)
 		{
-			enemy.TakeDamage(AttackDamage); 
+			// Obtener daño de ataque desde CharacterStats
+			int attackDamage = (int)characterStats.Get("attack_damage");
+			enemy.TakeDamage(attackDamage);
 		}
 		if (body is ObjetoRompible objeto)
 		{
@@ -296,26 +306,55 @@ public partial class Character : CharacterBody2D
 	// Salud y Stamina
 	private void RegenerateStamina()
 	{
-		// Regenerar resistencia
-		CurrentStamina = Math.Min(CurrentStamina + 0.35f, MaxStamina);
-		UpdateHealthAndStaminaBars();
+		// Obtener estamina actual
+		float currentStamina = (float)characterStats.Get("current_stamina");
+		float maxStamina = 85f;
+		
+		// Regenerar estamina
+		currentStamina = Math.Min(currentStamina + 0.35f, maxStamina);
+		characterStats.Call("set_stamina", currentStamina);
 	}
 
 	private void UpdateHealthAndStaminaBars()
 	{
-		// Actualizar las barras de salud y resistencia
-		_healthBar.Value = CurrentHealth;
-		_staminaBar.Value = CurrentStamina;
+		// Obtener valores actuales
+		float currentHealth = (float)characterStats.Get("current_health");
+		float currentStamina = (float)characterStats.Get("current_stamina");
+		
+		// Actualizar las barras
+		_healthBar.Value = currentHealth;
+		_staminaBar.Value = currentStamina;
+	}
+	
+	// Funciones para actualizar individualmente las barras
+	private void UpdateHealthBar(float newHealth)
+	{
+		_healthBar.Value = newHealth;
+	}
+	
+	private void UpdateStaminaBar(float newStamina)
+	{
+		_staminaBar.Value = newStamina;
 	}
 
 	public void TakeDamage(int damage)
 	{
-		// Reducir daño
-		CurrentHealth = Math.Max(0, CurrentHealth - damage);
-		UpdateHealthAndStaminaBars();
+		// Obtener valores de CharacterStats
+		float currentHealth = (float)characterStats.Get("current_health");
+		int defense = (int)characterStats.Get("defense");
+		
+		// Calcular daño después de defensa
+		int finalDamage = (int)characterStats.Call("calculate_damage_taken", damage);
+		
+		// Aplicar daño
+		currentHealth = Math.Max(0, currentHealth - finalDamage);
+		characterStats.Call("set_health", currentHealth);
+		
+		// Comprobar si está muerto
+		bool isDead = (bool)characterStats.Call("is_player_dead");
 		
 		// Si la salud llega a 0, cambiar al estado de muerte
-		if (CurrentHealth <= 30)
+		if (isDead)
 		{
 			_currentState = CharacterState.Death;
 			_currentDeathFrame = 0;

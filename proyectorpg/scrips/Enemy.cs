@@ -25,6 +25,7 @@ public partial class Enemy : CharacterBody2D
 	protected Node2D _enemyHealthBar;
 	protected Timer _attackCooldown;
 	protected Timer _startDelay;
+	protected Node _characterStats;
 
 	// Estado actual
 	private EnemyState _currentState = EnemyState.Idle;
@@ -49,6 +50,9 @@ public partial class Enemy : CharacterBody2D
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_attackCooldown = GetNode<Timer>("attackCooldown");
 		_startDelay = GetNode<Timer>("startDelay");
+		
+		// Obtener referencia a CharacterStats
+		_characterStats = GetNode<Node>("/root/CharacterStats");
 		
 		_startDelay.Timeout += OnStartDelayTimeout;
 		_startDelay.Start();
@@ -225,9 +229,11 @@ public partial class Enemy : CharacterBody2D
 
 	public virtual void TakeDamage(int damageAmount)
 	{
-		//cambiar más adelante la defensa
+		// Aplicar daño (en un futuro se podría considerar defensa del enemigo)
 		CurrentHealth -= damageAmount;
 		
+		// Log para depuración
+		GD.Print($"Enemigo recibió {damageAmount} de daño. Salud restante: {CurrentHealth}");
 
 		if (CurrentHealth <= 0)
 		{
