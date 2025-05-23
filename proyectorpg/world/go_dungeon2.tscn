@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccocpa4ypfr2m"]
+
+[ext_resource type="Script" uid="uid://4mbb8rh615sk" path="res://scrips/GoDungeon2.cs" id="1_u608e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtlh8"]
+size = Vector2(102, 38)
+
+[node name="ExitDungeon" type="Node2D"]
+script = ExtResource("1_u608e")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_mtlh8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -18,6 +18,8 @@ public partial class Enemy : CharacterBody2D
 	[Export] protected int CurrentHealth { get; set; }
 	[Export] protected int Damage { get; set; } = 10;
 	[Export] protected float Speed { get; set; } = 30f;
+	[Export] protected int ExperienceValue { get; set; } = 20; // Valor de experiencia al morir
+	[Export] protected int ScoreValue { get; set; } = 200; // Valor de puntuación al morir
 
 	// Nodos
 	protected AnimatedSprite2D _animatedSprite;
@@ -194,21 +196,20 @@ public partial class Enemy : CharacterBody2D
 
 	private void ProcessDeathState(double delta)
 	{
-	_currentDEATHFrame++;
+		_currentDEATHFrame++;
 
-   // Animación y muerte
-	if (_currentDEATHFrame == 1)
-	{
-		_animatedSprite.Play("death");
-	}
+		// Animación y muerte
+		if (_currentDEATHFrame == 1)
+		{
+			_animatedSprite.Play("death");
+		}
 
-  
-	if (_currentDEATHFrame >= DEATH_FRAMES)
-	{
-		QueueFree();
-		_currentDEATHFrame = 0;
+		if (_currentDEATHFrame >= DEATH_FRAMES)
+		{
+			QueueFree();
+			_currentDEATHFrame = 0;
+		}
 	}
-}
 
 	private void PerformAttack()
 	{
@@ -237,12 +238,40 @@ public partial class Enemy : CharacterBody2D
 
 		if (CurrentHealth <= 0)
 		{
+			// Dar experiencia y puntuación al jugador cuando el enemigo muere
+			GiveRewardsToPlayer();
+			
 			_currentDEATHFrame = 0;
 			_currentState = EnemyState.Death;
-		}else{
+		}
+		else
+		{
 			// Cambiar al estado de recibir el golpe
 			_currentState = EnemyState.GetHit;
 			_currentGetHitFrame = 0;
+		}
+	}
+
+	// Método para dar experiencia y puntuación al jugador
+	protected virtual void GiveRewardsToPlayer()
+	{
+		// Obtener referencia al personaje
+		if (_character != null && _character is Character characterBody)
+		{
+			// Otorgar experiencia al CharacterStats
+			_characterStats.Call("add_experience", ExperienceValue, GlobalPosition);
+			GD.Print($"Otorgando {ExperienceValue} puntos de experiencia al jugador");
+			
+			// Otorgar puntuación al CharacterStats
+			_characterStats.Call("add_score", ScoreValue);
+			GD.Print($"Otorgando {ScoreValue} puntos de puntuación al jugador");
+		}
+		else
+		{
+			// Si no hay referencia directa al personaje, dar recompensas sin posición
+			_characterStats.Call("add_experience", ExperienceValue);
+			_characterStats.Call("add_score", ScoreValue);
+			GD.Print($"Otorgando {ExperienceValue} EXP y {ScoreValue} puntos al jugador");
 		}
 	}
 

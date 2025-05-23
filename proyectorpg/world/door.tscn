@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://c4kv23d5ounuc"]
+
+[ext_resource type="Script" uid="uid://c4a2sdktbdyv2" path="res://scrips/door.gd" id="1_oap2s"]
+[ext_resource type="Texture2D" uid="uid://ba0g0ieo2ph28" path="res://assets/sprites/RF_Catacombs_v1.0/mainlevbuild.png" id="1_tse0d"]
+[ext_resource type="Texture2D" uid="uid://phcp4ctwh21p" path="res://assets/mios/KeyString.png" id="2_c57h4"]
+[ext_resource type="Texture2D" uid="uid://br5f430lperhw" path="res://assets/mios/Keyboard Letters and Symbols.png" id="3_c57h4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oap2s"]
+atlas = ExtResource("2_c57h4")
+region = Rect2(0, 160, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tse0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oap2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_843e7"]
+atlas = ExtResource("3_c57h4")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oap2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_843e7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c57h4"]
+radius = 80.025
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oap2s"]
+size = Vector2(96, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmf0m"]
+size = Vector2(14, 80)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_oap2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_tse0d")
+region_enabled = true
+region_rect = Rect2(495.074, 27.0933, 96.8897, 86.4067)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-40, 0)
+texture = ExtResource("1_tse0d")
+region_enabled = true
+region_rect = Rect2(495.074, 27.0933, 17.3581, 86.4067)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(40.5, 0)
+texture = ExtResource("1_tse0d")
+region_enabled = true
+region_rect = Rect2(576.154, 27.0933, 15.8099, 86.4067)
+
+[node name="Candado" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(0, -1)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_tse0d")
+
+[node name="Tecla" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(9, -11)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_oap2s")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_c57h4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_oap2s")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(41, 2)
+shape = SubResource("RectangleShape2D_nmf0m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-40, 1)
+shape = SubResource("RectangleShape2D_nmf0m")

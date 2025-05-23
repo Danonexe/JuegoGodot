@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://gd7f3g1o1u7m"]
+
+[ext_resource type="Texture2D" uid="uid://c2wiglvp0k3gd" path="res://assets/sprites/Key Items 16x16/11.png" id="1_modbx"]
+[ext_resource type="Script" uid="uid://cj7016mgtf25o" path="res://scrips/potion.gd" id="1_q04or"]
+[ext_resource type="Texture2D" uid="uid://ci4cddhqdphi8" path="res://assets/sprites/Key Items 16x16/Selected/11.png" id="2_q04or"]
+[ext_resource type="Texture2D" uid="uid://br5f430lperhw" path="res://assets/mios/Keyboard Letters and Symbols.png" id="3_g1flx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_843e7"]
+atlas = ExtResource("3_g1flx")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t388x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_843e7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcwut"]
+radius = 23.0217
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_q04or")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_modbx")
+
+[node name="Selected" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture = ExtResource("2_q04or")
+
+[node name="Tecla" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(9, -11)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_t388x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lcwut")

@@ -13,6 +13,11 @@ public partial class Slime : Enemy
 		Damage = 15;     
 		Speed = 30;    
 		CurrentHealth = MaxHealth;
+		
+		// El slime da menos experiencia por ser más fácil
+		ExperienceValue = 10;
+		
+		// El slime da pocos puntos por ser un enemigo fácil
+		ScoreValue = 100;
 	}
-
 }

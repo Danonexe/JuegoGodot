@@ -31,8 +31,15 @@ func _on_button_pressed():
 	# Deshabilitar el botón mientras se procesa
 	disabled = true
 	
-	# Generar valor para puntuación
-	var fake_score = randi_range(100, 1000)  # Puntuación aleatoria entre 100 y 1000
+	# Obtener el score real del sistema de estadísticas
+	var character_stats = get_node("/root/CharacterStats")
+	var real_score = 0
+	
+	if character_stats != null:
+		real_score = character_stats.score
+		print_debug("Score real obtenido: " + str(real_score))
+	else:
+		print_debug("No se pudo acceder a CharacterStats, usando score 0")
 	
 	# Obtener el tiempo real del temporizador global
 	var temporizador = get_node("/root/Temporizador")
@@ -61,13 +68,16 @@ func _on_button_pressed():
 	var data = {
 		"Id": "",  # Usamos "Id" con I mayúscula y cadena vacía
 		"nick": nick,
-		"score": fake_score,
+		"score": real_score,  # Usamos el score real en lugar del falso
 		"time": tiempo_formateado,  # Usamos el tiempo formateado
 		"date": current_date  # Incluimos la fecha desde el cliente
 	}
 	
 	# Convertir a JSON
 	var json_data = JSON.stringify(data)
+	
+	# Debug: mostrar los datos que se van a enviar
+	print_debug("Datos a enviar: " + json_data)
 	
 	# Crear una solicitud HTTP
 	var http_request = HTTPRequest.new()

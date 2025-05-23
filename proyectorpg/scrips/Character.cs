@@ -40,6 +40,9 @@ public partial class Character : CharacterBody2D
 	private TextureProgressBar _staminaBar; 
 	private TextureProgressBar _healthBar; 
 	private Camera2D _camera; 
+	
+	// Ruta a la escena de texto flotante
+	private const string FloatingTextScene = "res://menu/FloatingText.tscn";  // Ruta actualizada
 
 	public override void _Ready()
 	{
@@ -49,6 +52,7 @@ public partial class Character : CharacterBody2D
 		// Conectar a las señales de CharacterStats
 		characterStats.Connect("health_changed", Callable.From((float newHealth) => UpdateHealthBar(newHealth)));
 		characterStats.Connect("stamina_changed", Callable.From((float newStamina) => UpdateStaminaBar(newStamina)));
+		characterStats.Connect("level_up", Callable.From((int newLevel, Vector2 position) => ShowLevelUpText(newLevel)));
 
 		// Inicializar nodos
 		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -335,6 +339,24 @@ public partial class Character : CharacterBody2D
 	private void UpdateStaminaBar(float newStamina)
 	{
 		_staminaBar.Value = newStamina;
+	}
+	
+	// Método para mostrar el texto de subida de nivel
+	private void ShowLevelUpText(int newLevel)
+	{
+		// Cargar la escena de texto flotante
+		PackedScene textScene = ResourceLoader.Load<PackedScene>(FloatingTextScene);
+		Node2D floatingText = textScene.Instantiate<Node2D>();
+		
+		// Configurar el texto usando los métodos en GDScript
+		floatingText.Call("set_text", "LVL UP");
+		floatingText.Call("set_color", new Color(1.0f, 0.8f, 0.2f)); // Color dorado
+		
+		// Posicionar encima del personaje
+		floatingText.Position = new Vector2(0, -30); // Un poco arriba
+		
+		// Añadir al árbol de nodos
+		AddChild(floatingText);
 	}
 
 	public void TakeDamage(int damage)

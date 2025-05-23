@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://drv6evhybd4sw"]
+
+[ext_resource type="Script" uid="uid://hsjnnxt6k6mq" path="res://scrips/floating_text.gd" id="1_pbhw1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbhw1"]
+font_size = 10
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_pbhw1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -17.0
+offset_top = 2.0
+offset_right = 17.0
+offset_bottom = 25.0
+text = "LVL UP"
+label_settings = SubResource("LabelSettings_pbhw1")
