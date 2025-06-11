@@ -35,7 +35,7 @@ public partial class Enemy : CharacterBody2D
 	// Persecución y ataque
 	protected Node2D _character = null;
 	protected bool _gameStarted = false;
-	protected float ATTACK_DISTANCE = 20.0f;
+	protected float ATTACK_DISTANCE = 15.0f;
 	protected const float KNOCKBACK_FORCE = 220.0f;
 
 	// Variables de estado
@@ -43,7 +43,7 @@ public partial class Enemy : CharacterBody2D
 	private const int ATTACK_FRAMES = 30;
 	private const int GET_HIT_FRAMES = 35;
 	private int _currentGetHitFrame = 0;
-	private const int DEATH_FRAMES = 35;
+	private int DEATH_FRAMES = 35;
 	private int _currentDEATHFrame = 0;
 
 	public override void _Ready()

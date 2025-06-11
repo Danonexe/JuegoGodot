@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci3w7ogyxekns"]
+[gd_scene load_steps=10 format=3 uid="uid://ci3w7ogyxekns"]
 
 [ext_resource type="PackedScene" uid="uid://cik5ue2b73wx7" path="res://menu/buttonStart.tscn" id="1_h8dqi"]
 [ext_resource type="Script" uid="uid://i70m7fj4ebrh" path="res://scrips/Menu.cs" id="1_u6b4f"]
 [ext_resource type="Texture2D" uid="uid://c2g5qiuoc5uyp" path="res://assets/mios/Fondo.png" id="2_6l2c1"]
 [ext_resource type="PackedScene" uid="uid://xm1cq7yprq45" path="res://menu/buttonExit.tscn" id="2_280xi"]
 [ext_resource type="Texture2D" uid="uid://clybaasgslpt8" path="res://assets/mios/TextoLogoJuego.png" id="3_53gbl"]
+[ext_resource type="Texture2D" uid="uid://cnnte7q7dxxdx" path="res://assets/mios/UI assets (2x).png" id="4_v6yed"]
+[ext_resource type="AudioStream" uid="uid://d2vnkpg5swvcu" path="res://assets/sfx/introSong.mp3" id="6_juveg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v6yed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4hbh"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -28,24 +34,49 @@ texture = ExtResource("2_6l2c1")
 region_rect = Rect2(65.019, 114.021, 191, 69)
 
 [node name="ButtonStart" parent="." instance=ExtResource("1_h8dqi")]
+z_index = 2
 layout_mode = 0
 offset_left = 468.0
-offset_top = 283.0
+offset_top = 275.0
 offset_right = 683.0
-offset_bottom = 365.0
+offset_bottom = 357.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v6yed")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(575, 322)
+scale = Vector2(3.43445, 3.55779)
+texture = ExtResource("4_v6yed")
+region_enabled = true
+region_rect = Rect2(193.277, 135.752, 93.7029, 44.0291)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(574, 322)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Button" parent="." instance=ExtResource("2_280xi")]
+z_index = 2
 layout_mode = 0
 offset_left = 493.0
-offset_top = 424.0
+offset_top = 426.0
 offset_right = 657.0
-offset_bottom = 489.0
+offset_bottom = 491.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s4hbh")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(574, 462)
+scale = Vector2(2.6357, 2.73036)
+texture = ExtResource("4_v6yed")
+region_enabled = true
+region_rect = Rect2(193.277, 135.752, 93.7029, 44.0291)
 
 [node name="TextoLogoJuego" type="Sprite2D" parent="."]
 position = Vector2(576, 126)
 scale = Vector2(7.81646, 7.23418)
 texture = ExtResource("3_53gbl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_juveg")
+volume_db = -25.067
+autoplay = true

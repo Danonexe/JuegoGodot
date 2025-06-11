@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://ckf4owyxl2ori"]
+[gd_scene load_steps=17 format=4 uid="uid://ckf4owyxl2ori"]
 
 [ext_resource type="PackedScene" uid="uid://dle702ty1obas" path="res://scenes/character.tscn" id="2_5atvc"]
 [ext_resource type="PackedScene" uid="uid://chufj7w1y012c" path="res://menu/pausa.tscn" id="2_tqbww"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dq544p7garn1j" path="res://world/vela_3.tscn" id="10_ml55o"]
 [ext_resource type="PackedScene" uid="uid://bmr5jdl15ahqp" path="res://world/paloConPlato.tscn" id="12_4obmc"]
 [ext_resource type="PackedScene" uid="uid://ccocpa4ypfr2m" path="res://world/go_dungeon2.tscn" id="12_7wjui"]
+[ext_resource type="PackedScene" uid="uid://xoca6ymahihf" path="res://enemy/Goblin.tscn" id="13_7a5bf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hc73x"]
 
@@ -1735,6 +1736,9 @@ position = Vector2(107, -295)
 [node name="paloConPlato" parent="." instance=ExtResource("12_4obmc")]
 position = Vector2(-64, 7)
 
+[node name="Estanteria2" parent="." instance=ExtResource("6_aig45")]
+position = Vector2(-80, 264)
+
 [node name="Light" type="Node" parent="."]
 
 [node name="vela1" parent="Light" instance=ExtResource("7_07pgj")]
@@ -1861,9 +1865,6 @@ metadata/_edit_lock_ = true
 position = Vector2(-234, 158)
 metadata/_edit_lock_ = true
 
-[node name="Estanteria" parent="Light" instance=ExtResource("6_aig45")]
-position = Vector2(-79, 264)
-
 [node name="Slime3" parent="." instance=ExtResource("4_ica8i")]
 position = Vector2(502, 83)
 
@@ -1878,3 +1879,6 @@ position = Vector2(575, 287)
 
 [node name="jarron5" parent="." instance=ExtResource("5_vtrbx")]
 position = Vector2(-399, 26)
+
+[node name="Slime4" parent="." instance=ExtResource("13_7a5bf")]
+position = Vector2(-334, -339)

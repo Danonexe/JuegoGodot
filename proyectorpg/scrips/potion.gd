@@ -9,6 +9,7 @@ extends Node2D
 var _player_inside = false
 var _player_body = null
 var _potion_consumed = false  # Para evitar que se vuelva a consumir
+var _potion_audio = null  # NUEVO: Audio para el sonido de poción
 
 # Cantidad de vida que cura la poción
 const HEAL_AMOUNT = 20
@@ -22,7 +23,42 @@ func _ready():
 	_area.body_entered.connect(_on_body_entered)
 	_area.body_exited.connect(_on_body_exited)
 	
+	# NUEVO: Crear y configurar el audio por código
+	create_potion_audio()
+	
 	print("Potion: Script iniciado correctamente")
+
+# NUEVO: Método para crear el audio completamente por código
+func create_potion_audio():
+	# Crear el nodo AudioStreamPlayer2D
+	_potion_audio = AudioStreamPlayer2D.new()
+	_potion_audio.name = "PotionAudio"
+	
+	# Cargar el archivo de audio
+	var potion_sound = load("res://assets/sfx/Key.ogg")
+	
+	if potion_sound != null:
+		# Configurar el audio
+		_potion_audio.stream = potion_sound
+		_potion_audio.volume_db = -3.0  # Un poco más alto que la espada
+		_potion_audio.pitch_scale = 1.0  # Tono normal
+		_potion_audio.max_distance = 2000.0  # Distancia máxima para escucharlo
+		_potion_audio.autoplay = false  # No reproducir automáticamente
+		
+		# Añadir como hijo de la poción
+		add_child(_potion_audio)
+		
+		print("Potion: AudioStreamPlayer2D creado y sonido cargado correctamente desde res://assets/sfx/Potion.wav")
+	else:
+		push_error("Potion: No se pudo cargar Potion.wav desde res://assets/sfx/Potion.wav")
+		push_error("Potion: Asegúrate de que el archivo existe en esa ruta")
+
+# NUEVO: Método para reproducir el sonido de poción
+func play_potion_sound():
+	if _potion_audio != null and _potion_audio.stream != null:
+		_potion_audio.play()
+	else:
+		print("Potion: No se puede reproducir sonido de poción (audio no disponible)")
 
 func _process(delta):
 	# Debug y detección de input
@@ -96,6 +132,9 @@ func consume_potion():
 	
 	# Marcar como consumida para evitar múltiples consumos
 	_potion_consumed = true
+	
+	# NUEVO: Reproducir sonido de poción
+	play_potion_sound()
 	
 	# Ocultar la UI inmediatamente
 	hide_ui()

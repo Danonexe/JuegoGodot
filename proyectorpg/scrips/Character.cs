@@ -39,10 +39,12 @@ public partial class Character : CharacterBody2D
 	private AnimatedSprite2D _animatedSprite; 
 	private TextureProgressBar _staminaBar; 
 	private TextureProgressBar _healthBar; 
-	private Camera2D _camera; 
+	private Camera2D _camera;
+	private AudioStreamPlayer2D _swordAudio; // Audio para el sonido de espada
+	private AudioStreamPlayer2D _damageAudio; // NUEVO: Audio para el sonido de daño
 	
 	// Ruta a la escena de texto flotante
-	private const string FloatingTextScene = "res://menu/FloatingText.tscn";  // Ruta actualizada
+	private const string FloatingTextScene = "res://menu/FloatingText.tscn";
 
 	public override void _Ready()
 	{
@@ -61,8 +63,114 @@ public partial class Character : CharacterBody2D
 		_healthBar = healthStaminaBar.GetNode<TextureProgressBar>("Health");
 		_camera = GetNode<Camera2D>("Camera2D");
 
+		// Crear y configurar los audios por código
+		CreateSwordAudio();
+		CreateDamageAudio(); // NUEVO: Crear audio de daño
+
 		// Actualizar las barras con valores iniciales de CharacterStats
 		UpdateHealthAndStaminaBars();
+	}
+
+	// Método para crear el audio de espada
+	private void CreateSwordAudio()
+	{
+		try
+		{
+			// Crear el nodo AudioStreamPlayer2D
+			_swordAudio = new AudioStreamPlayer2D();
+			_swordAudio.Name = "SwordAudio";
+			
+			// Cargar el archivo de audio con la ruta correcta
+			var swordSound = ResourceLoader.Load<AudioStream>("res://assets/sfx/Sword.wav");
+			
+			if (swordSound != null)
+			{
+				// Configurar el audio
+				_swordAudio.Stream = swordSound;
+				_swordAudio.VolumeDb = -5.0f; // Un poco más bajo para no ser molesto
+				_swordAudio.PitchScale = 1.0f; // Tono normal
+				_swordAudio.MaxDistance = 2000.0f; // Distancia máxima para escucharlo
+				_swordAudio.Autoplay = false; // No reproducir automáticamente
+				
+				// Añadir como hijo del personaje
+				AddChild(_swordAudio);
+				
+				GD.Print("Character: AudioStreamPlayer2D creado y sonido cargado correctamente desde res://assets/sfx/Sword.wav");
+			}
+			else
+			{
+				GD.PrintErr("Character: No se pudo cargar Sword.wav desde res://assets/sfx/Sword.wav");
+				GD.PrintErr("Character: Asegúrate de que el archivo existe en esa ruta");
+			}
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr($"Character: Error al crear audio de espada: {e.Message}");
+		}
+	}
+
+	// NUEVO: Método para crear el audio de daño completamente por código
+	private void CreateDamageAudio()
+	{
+		try
+		{
+			// Crear el nodo AudioStreamPlayer2D
+			_damageAudio = new AudioStreamPlayer2D();
+			_damageAudio.Name = "DamageAudio";
+			
+			// Cargar el archivo de audio
+			var damageSound = ResourceLoader.Load<AudioStream>("res://assets/sfx/CharacterDamage.ogg");
+			
+			if (damageSound != null)
+			{
+				// Configurar el audio
+				_damageAudio.Stream = damageSound;
+				_damageAudio.VolumeDb = -3.0f; // Un poco más alto para que se escuche el dolor
+				_damageAudio.PitchScale = 1.0f; // Tono normal
+				_damageAudio.MaxDistance = 2000.0f; // Distancia máxima para escucharlo
+				_damageAudio.Autoplay = false; // No reproducir automáticamente
+				
+				// Añadir como hijo del personaje
+				AddChild(_damageAudio);
+				
+				GD.Print("Character: AudioStreamPlayer2D de daño creado y sonido cargado correctamente desde res://assets/sfx/CharacterDamage.ogg");
+			}
+			else
+			{
+				GD.PrintErr("Character: No se pudo cargar CharacterDamage.ogg desde res://assets/sfx/CharacterDamage.ogg");
+				GD.PrintErr("Character: Asegúrate de que el archivo existe en esa ruta");
+			}
+		}
+		catch (Exception e)
+		{
+			GD.PrintErr($"Character: Error al crear audio de daño: {e.Message}");
+		}
+	}
+
+	// Método para reproducir el sonido de espada
+	private void PlaySwordSound()
+	{
+		if (_swordAudio != null && _swordAudio.Stream != null)
+		{
+			_swordAudio.Play();
+		}
+		else
+		{
+			GD.Print("Character: No se puede reproducir sonido de espada (audio no disponible)");
+		}
+	}
+
+	// NUEVO: Método para reproducir el sonido de daño
+	private void PlayDamageSound()
+	{
+		if (_damageAudio != null && _damageAudio.Stream != null)
+		{
+			_damageAudio.Play();
+		}
+		else
+		{
+			GD.Print("Character: No se puede reproducir sonido de daño (audio no disponible)");
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -94,8 +202,23 @@ public partial class Character : CharacterBody2D
 		// Bloquear movimiento si estás muerto
 		if (_currentState == CharacterState.Death) return;
 
-		// Obtener dirección de entrada
-		_currentDirection = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
+		// Obtener dirección de entrada combinando flechas y WASD
+		Vector2 inputDirection = Vector2.Zero;
+		
+		// Flechas del teclado (sistema original)
+		inputDirection += Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		
+		// WASD (detección directa)
+		if (Input.IsKeyPressed(Key.A))
+			inputDirection.X -= 1;
+		if (Input.IsKeyPressed(Key.D))
+			inputDirection.X += 1;
+		if (Input.IsKeyPressed(Key.W))
+			inputDirection.Y -= 1;
+		if (Input.IsKeyPressed(Key.S))
+			inputDirection.Y += 1;
+		
+		_currentDirection = inputDirection.Normalized();
 
 		Vector2 velocity = Velocity;
 
@@ -117,7 +240,7 @@ public partial class Character : CharacterBody2D
 		// Bloquear ataque si estás muerto
 		if (_currentState == CharacterState.Death) return;
 
-		// Manejar ataque
+		// Manejar ataque (solo Enter por ahora)
 		if (Input.IsActionJustPressed("ui_accept") && CanAttack())
 		{
 			StartAttack();
@@ -175,6 +298,9 @@ public partial class Character : CharacterBody2D
 		// Iniciar ataque
 		_currentState = CharacterState.Attacking;
 		_currentAttackFrame = 0;
+		
+		// Reproducir sonido de espada
+		PlaySwordSound();
 		
 		// Reducir estamina
 		float currentStamina = (float)characterStats.Get("current_stamina");
@@ -385,6 +511,8 @@ public partial class Character : CharacterBody2D
 		}
 		else
 		{
+			// NUEVO: Reproducir sonido de daño cuando recibe daño pero no muere
+			PlayDamageSound();
 			ShakeCameraOnHit();
 		}
 	}

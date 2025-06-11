@@ -8,6 +8,7 @@ extends Node2D
 var _player_inside = false
 var _is_collected = false
 var _player_body = null  # Guardar referencia al jugador
+var _key_audio = null  # NUEVO: Audio para el sonido de llave
 
 func _ready():
 	# Ocultar el sprite de la tecla inicialmente
@@ -17,7 +18,42 @@ func _ready():
 	_area.body_entered.connect(_on_body_entered)
 	_area.body_exited.connect(_on_body_exited)
 	
+	# NUEVO: Crear y configurar el audio por código
+	create_key_audio()
+	
 	print("Key: Script iniciado correctamente")
+
+# NUEVO: Método para crear el audio completamente por código
+func create_key_audio():
+	# Crear el nodo AudioStreamPlayer2D
+	_key_audio = AudioStreamPlayer2D.new()
+	_key_audio.name = "KeyAudio"
+	
+	# Cargar el archivo de audio
+	var key_sound = load("res://assets/sfx/Key.ogg")
+	
+	if key_sound != null:
+		# Configurar el audio
+		_key_audio.stream = key_sound
+		_key_audio.volume_db = -2.0  # Un poco más alto para que se escuche bien
+		_key_audio.pitch_scale = 1.0  # Tono normal
+		_key_audio.max_distance = 2000.0  # Distancia máxima para escucharlo
+		_key_audio.autoplay = false  # No reproducir automáticamente
+		
+		# Añadir como hijo de la llave
+		add_child(_key_audio)
+		
+		print("Key: AudioStreamPlayer2D creado y sonido cargado correctamente desde res://assets/sfx/Key.ogg")
+	else:
+		push_error("Key: No se pudo cargar Key.wav desde res://assets/sfx/Key.wav")
+		push_error("Key: Asegúrate de que el archivo existe en esa ruta")
+
+# NUEVO: Método para reproducir el sonido de llave
+func play_key_sound():
+	if _key_audio != null and _key_audio.stream != null:
+		_key_audio.play()
+	else:
+		print("Key: No se puede reproducir sonido de llave (audio no disponible)")
 
 func _process(delta):
 	# Solo verificar la tecla E si el jugador está dentro y la llave no ha sido recolectada
@@ -69,6 +105,9 @@ func collect_key():
 	
 	# Marcar como recolectada para evitar múltiples recolecciones
 	_is_collected = true
+	
+	# NUEVO: Reproducir sonido de llave
+	play_key_sound()
 	
 	# Ocultar el sprite de la tecla inmediatamente
 	_tecla_sprite.visible = false

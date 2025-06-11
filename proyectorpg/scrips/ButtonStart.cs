@@ -14,6 +14,19 @@ public partial class ButtonStart : Button
 		// Resetear las estadísticas del personaje
 		ResetPlayerStats();
 		
+		// Activar la música del juego
+		var musicManager = GetNode<Node>("/root/Music"); // Asumiendo que el singleton se llama "Music"
+		
+		if (musicManager != null)
+		{
+			musicManager.Call("play_game_music");
+			GD.Print("ButtonStart: Música del juego activada");
+		}
+		else
+		{
+			GD.PrintErr("ButtonStart: No se pudo acceder al MusicManager");
+		}
+		
 		// Acceder al singleton de variables globales
 		var temporizador = GetNode<Node>("/root/Temporizador");
 		

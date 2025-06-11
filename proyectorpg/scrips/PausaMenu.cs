@@ -42,9 +42,27 @@ public partial class PausaMenu : Control
 	}
 
 	public void _on_button_go_to_menu_pressed()
+{
+	// Parar y resetear el timer
+	var temporizador = GetNode<Node>("/root/Temporizador");
+	if (temporizador != null)
 	{
-		// Cambiar a la escena del menú principal
-		GetTree().Paused = false;
-		GetTree().ChangeSceneToFile("res://menu/menu.tscn");
+		temporizador.Call("stop_timer");
+		temporizador.Set("current_time", 0.0f);
+		temporizador.Set("timer_running", false);
+		GD.Print("Timer detenido y reseteado");
 	}
+
+	// Resetear completamente la música
+	var musicManager = GetNode<Node>("/root/Music");
+	if (musicManager != null)
+	{
+		musicManager.Call("reset_music");
+		GD.Print("Música reseteada completamente");
+	}
+
+	// Despausar y cambiar de escena
+	GetTree().Paused = false;
+	GetTree().ChangeSceneToFile("res://menu/menu.tscn");
+}
 }

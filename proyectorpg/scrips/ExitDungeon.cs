@@ -40,6 +40,13 @@ public partial class ExitDungeon : Node2D
 			}
 			
 			// Cambiar a la escena de fin de demo
+			// Resetear completamente la música
+	var musicManager = GetNode<Node>("/root/Music");
+	if (musicManager != null)
+	{
+		musicManager.Call("reset_music");
+		GD.Print("Música reseteada completamente");
+	}
 			GetTree().ChangeSceneToFile("res://menu/finDemo.tscn");
 		}
 	}

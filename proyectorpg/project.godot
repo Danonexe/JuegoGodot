@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Temporizador="*res://temporizador.gd"
 CharacterStats="*res://characterStats.gd"
+Music="*res://scrips/music.gd"
 
 [display]
 
